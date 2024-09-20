@@ -4,7 +4,7 @@ FROM python:3.11-slim
 # Definir o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Instalar Git e Git LFS para gerenciar arquivos grandes
+# Atualizar e instalar dependências do sistema
 RUN apt-get update && apt-get install -y \
     git \
     git-lfs \
@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y \
     libsndfile1 \
     espeak-ng \
     ffmpeg \
-    && git lfs install
+    && git lfs install && apt-get clean
+
+# Atualizar o pip antes de instalar as dependências
+RUN python -m pip install --upgrade pip
 
 # Copiar o arquivo de dependências para o container
 COPY requirements.txt /app/requirements.txt
@@ -20,11 +23,8 @@ COPY requirements.txt /app/requirements.txt
 # Instalar as dependências listadas em requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Instalar pacotes individualmente
-RUN pip install --no-cache-dir fastapi
-RUN pip install --no-cache-dir uvicorn
-# Adicione mais pacotes manualmente até encontrar o que está falhando
-
+# Instalar torch manualmente se necessário
+RUN pip install torch==2.1.1+cpu
 
 # Copiar o código do projeto e os modelos para o container
 COPY . /app
