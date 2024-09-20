@@ -31,4 +31,4 @@ COPY . /app
 EXPOSE 8000
 
 # Comando para rodar a API
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--timeout-keep-alive", "120"]
