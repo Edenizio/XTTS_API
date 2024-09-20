@@ -20,6 +20,12 @@ COPY requirements.txt /app/requirements.txt
 # Instalar as dependências listadas em requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Instalar pacotes individualmente
+RUN pip install --no-cache-dir fastapi
+RUN pip install --no-cache-dir uvicorn
+# Adicione mais pacotes manualmente até encontrar o que está falhando
+
+
 # Copiar o código do projeto e os modelos para o container
 COPY . /app
 
