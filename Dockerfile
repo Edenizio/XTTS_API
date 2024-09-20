@@ -5,9 +5,13 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Instalar Git e Git LFS para gerenciar arquivos grandes
-RUN apt-get update && apt-get install -y \ 
-git \
+RUN apt-get update && apt-get install -y \
+    git \
     git-lfs \
+    build-essential \
+    libsndfile1 \
+    espeak-ng \
+    ffmpeg \
     && git lfs install
 
 # Copiar o arquivo de dependências para o container
