@@ -23,8 +23,6 @@ COPY requirements.txt /app/requirements.txt
 # Instalar as dependências listadas em requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Instalar torch manualmente se necessário
-RUN pip install torch==2.1.1+cpu
 
 # Copiar o código do projeto e os modelos para o container
 COPY . /app
